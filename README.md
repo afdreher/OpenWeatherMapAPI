@@ -7,30 +7,26 @@ from [openweathermap.org](http://openweathermap.org/ "OpenWeatherMap.org").
 
 ## API Changes ##
 
-### Version 0.0.5 ###
+### Version 0.0.5a ###
 
 The methods for getting the daily forecast have changed names. So instead of: `dailyForecastWeatherByCityName:withCount:withCallback:`
 they are now called: `dailyForecastWeatherByCityName:withCount:andCallback:`
 
-Added new methods for setting the `lang` parameter to the api:
-    
-     - (void) setLangWithPreferedLanguage;
-     - (void) setLang:(NSString *) lang;
-     - (NSString *) lang;
+Many of the previous getter/setter methods are now defined as property methods.
 
-The method `setLangWithPreferedLanguage` sets the lang parameter according to the prefered language on the phone.
+The method `setLangWithPreferedLanguage`, which sets the language parameter according to the preferred language on the phone, is now called `setLanguageUsingPreferredLanguage`.
+
+For the methods that accept a count argument, the value is now an NSNumber, to allow for optional `nil` values, since counts are not specifically required by the OpenWeatherMap API.
+
+Methods for querying historical weather data have been added.
 
 ## Usage ##
 
 ### Installation ###
 
-Using the API is really simple if you have [CocoaPods](http://cocoapods.org/ "CocoaPods.org") installed.
+Since this is a forked release, I'm not going to make an alternative Pod file.  You should download the code directly if you wish to use this version.
 
-1. Add the dependency to your `Podfile`
-    
-    ```Ruby
-    pod 'OpenWeatherMapAPI', '~> 0.0.5'
-    ```
+1. Download the code
 
 2. Include the header `#import "OWMWeatherAPI.h"`.
 3. Setup the api:
@@ -43,7 +39,7 @@ Using the API is really simple if you have [CocoaPods](http://cocoapods.org/ "Co
 4. Select the default temperature format (defaults to Celsius)
 
     ```Objective-c
-    [weatherAPI setTemperatureFormat:kOWMTempCelcius];
+    [weatherAPI setTemperatureFormat:kOWMTempCelsius];
     ```
 
 ### Getting data ###
@@ -121,62 +117,86 @@ The following methods are availabe at this time:
 
 current weather by city name:
 ```Objective-c
-    -(void) currentWeatherByCityName:(NSString *) name
-                        withCallback:( void (^)( NSError* error, NSDictionary *result ) )callback;
+    - (void)currentWeatherByCityName:(NSString *)name
+                        withCallback:(OWMCallback)callback;
 ```
 
 current weather by coordinate:
 ```Objective-c
-    -(void) currentWeatherByCoordinate:(CLLocationCoordinate2D) coordinate
-                          withCallback:( void (^)( NSError* error, NSDictionary *result ) )callback;
+    - (void)currentWeatherByCoordinate:(CLLocationCoordinate2D)coordinate
+                          withCallback:(OWMCallback)callback;
 ```
 
 current weather by city id:
 ```Objective-c
-    -(void) currentWeatherByCityId:(NSString *) cityId
-                      withCallback:( void (^)( NSError* error, NSDictionary *result ) )callback;
+    - (void)currentWeatherByCityId:(NSString *)cityId
+                      withCallback:(OWMCallback)callback;
 ```
 
 ### forecasts (3 hour intervals) ###
 
 forecast by city name:
 ```Objective-c
-    -(void) forecastWeatherByCityName:(NSString *) name
-                         withCallback:( void (^)( NSError* error, NSDictionary *result ) )callback;
+    - (void)forecastWeatherByCityName:(NSString *) name
+                         withCallback:(OWMCallback)callback;
 ```
 
 forecast by coordinate:
 ```Objective-c
-    -(void) forecastWeatherByCoordinate:(CLLocationCoordinate2D) coordinate
-                           withCallback:( void (^)( NSError* error, NSDictionary *result ) )callback;
+    - (void)forecastWeatherByCoordinate:(CLLocationCoordinate2D)coordinate
+                           withCallback:(OWMCallback)callback;
 ```
 
 forecast by city id:
 ```Objective-c
-    -(void) forecastWeatherByCityId:(NSString *) cityId
-                       withCallback:( void (^)( NSError* error, NSDictionary *result ) )callback;
+    - (void)forecastWeatherByCityId:(NSString *)cityId
+                       withCallback:(OWMCallback)callback;
 ```
 
 ### daily forecasts ###
 
 daily forecast by city name:
 ```Objective-c
-    -(void) dailyForecastWeatherByCityName:(NSString *) name
-                                 withCount:(int) count
-                              andCallback:( void (^)( NSError* error, NSDictionary *result ) )callback;
+    -(void) dailyForecastWeatherByCityName:(NSString *)name
+                                 withCount:(NSNumber *)count
+                               andCallback:(OWMCallback)callback;
 ```
 
 daily forecast by coordinates:
 ```Objective-c
-    -(void) dailyForecastWeatherByCoordinate:(CLLocationCoordinate2D) coordinate
-                                   withCount:(int) count
-                                andCallback:( void (^)( NSError* error, NSDictionary *result ) )callback;
+    - (void)dailyForecastWeatherByCoordinate:(CLLocationCoordinate2D)coordinate
+                                   withCount:(NSNumber *)count
+                                 andCallback:(OWMCallback)callback;
 
 ```
 
 daily forecast by city id:
 ```Objective-c
-   -(void) dailyForecastWeatherByCityId:(NSString *) cityId
-                              withCount:(int) count
-                           andCallback:( void (^)( NSError* error, NSDictionary *result ) )callback;
+   - (void)dailyForecastWeatherByCityId:(NSString *)cityId
+                              withCount:(NSNumber *)count
+                           andCallback:(OWMCallback)callback;
 ```
+
+###  historical weather ###
+
+historical weather by city name:
+```Objective-c
+   - (void)historicalWeatherByCityName:(NSString *)name
+                             startDate:(NSDate *)start
+                               endDate:(NSDate *)end
+                           periodicity:(OWMPeriod)period
+                                 count:(NSNumber *)count
+                          withCallback:(OWMCallback)callback;
+```
+
+historical weather by city id:
+```Objective-c
+   - (void)historicalWeatherByByCityId:(NSString *)cityId
+                             startDate:(NSDate *)start
+                               endDate:(NSDate *)end
+                           periodicity:(OWMPeriod)period
+                                 count:(NSNumber *)count
+                          withCallback:(OWMCallback)callback;
+```
+
+NOTE: Historical data may be missing.  In spot testing, API usually returns data from about 1 October 2012 onward.  Also note that the count often will not match the returned data, so use some caution with these methods.
