@@ -26,7 +26,7 @@
     [super viewDidLoad];
     
     downloadCount = 0;
-    
+
     NSString *dateComponents = @"H:m yyMMMMd";
     NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:dateComponents options:0 locale:[NSLocale systemLocale] ];
     _dateFormatter = [[NSDateFormatter alloc] init];
@@ -36,11 +36,11 @@
     
     _weatherAPI = [[OWMWeatherAPI alloc] initWithAPIKey:@"1111111111"]; // Replace the key with your own
     
-    // We want localized strings according to the prefered system language
-    [_weatherAPI setLangWithPreferedLanguage];
+    // We want localized strings according to the preferred system language
+    [_weatherAPI setLanguageUsingPreferredLanguage];
     
-    // We want the temperatures in celcius, you can also get them in farenheit.
-    [_weatherAPI setTemperatureFormat:kOWMTempCelcius];
+    // We want the temperatures in Celsius, you can also get them in Fahrenheit.
+    [_weatherAPI setTemperatureFormat:kOWMTempCelsius];
 
     [self.activityIndicator startAnimating];
     
@@ -77,9 +77,7 @@
         
         _forecast = result[@"list"];
         [self.forecastTableView reloadData];
-        
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,7 +108,10 @@
     cell.detailTextLabel.text = [_dateFormatter stringFromDate:forecastData[@"dt"]];
     
     return cell;
-    
+}
+
+- (IBAction)back:(UIStoryboardSegue *)segue {
+  NSLog(@"Back...");
 }
 
 @end

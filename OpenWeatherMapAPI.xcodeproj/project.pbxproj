@@ -23,6 +23,7 @@
 		64DC45F6177380FD0039B58D /* OWMWeatherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 64DC45F5177380FD0039B58D /* OWMWeatherAPI.m */; };
 		64F1A805177F966500E8E247 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 64F1A804177F966500E8E247 /* Icon.png */; };
 		64F1A807177F966700E8E247 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64F1A806177F966700E8E247 /* Icon@2x.png */; };
+		E3BFE25E17B3E75000FC9AB5 /* OWMHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BFE25D17B3E75000FC9AB5 /* OWMHistoryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		64F1A804177F966500E8E247 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		64F1A806177F966700E8E247 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		E0CED207DE554E61828EEA87 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3BFE25C17B3E75000FC9AB5 /* OWMHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OWMHistoryViewController.h; sourceTree = "<group>"; };
+		E3BFE25D17B3E75000FC9AB5 /* OWMHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OWMHistoryViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,8 @@
 				64DC45E8177380AC0039B58D /* MainStoryboard.storyboard */,
 				64DC45EB177380AC0039B58D /* OWMViewController.h */,
 				64DC45EC177380AC0039B58D /* OWMViewController.m */,
+				E3BFE25C17B3E75000FC9AB5 /* OWMHistoryViewController.h */,
+				E3BFE25D17B3E75000FC9AB5 /* OWMHistoryViewController.m */,
 				64DC45D7177380AC0039B58D /* Supporting Files */,
 			);
 			path = OpenWeatherMapAPI;
@@ -247,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64DC45DD177380AC0039B58D /* main.m in Sources */,
+				E3BFE25E17B3E75000FC9AB5 /* OWMHistoryViewController.m in Sources */,
 				64DC45E1177380AC0039B58D /* OWMAppDelegate.m in Sources */,
 				64DC45ED177380AC0039B58D /* OWMViewController.m in Sources */,
 				64DC45F6177380FD0039B58D /* OWMWeatherAPI.m in Sources */,

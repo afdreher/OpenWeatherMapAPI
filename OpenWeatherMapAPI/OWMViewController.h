@@ -17,4 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentTimestamp;
 @property (weak, nonatomic) IBOutlet UILabel *weather;
 
+- (IBAction)back:(UIStoryboardSegue *)segue;
+
 @end
