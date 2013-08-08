@@ -157,7 +157,7 @@ forecast by city id:
 
 daily forecast by city name:
 ```Objective-c
-    -(void) dailyForecastWeatherByCityName:(NSString *)name
+    - (void)dailyForecastWeatherByCityName:(NSString *)name
                                  withCount:(NSNumber *)count
                                andCallback:(OWMCallback)callback;
 ```
